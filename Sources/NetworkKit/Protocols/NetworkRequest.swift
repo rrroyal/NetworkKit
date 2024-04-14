@@ -16,8 +16,8 @@ public protocol NetworkRequest {
 	var method: HTTPMethod { get }
 	var path: String { get }
 
-	func queryItems() throws -> [URLQueryItem]?
-	func body() throws -> Data?
+	func makeQueryItems() throws -> [URLQueryItem]?
+	func makeBody() throws -> Data?
 
 	func handleResponse(_ response: URLResponse, data: Data) throws -> DecodedResponse
 }
@@ -25,6 +25,6 @@ public protocol NetworkRequest {
 // MARK: - NetworkRequest+Default
 
 public extension NetworkRequest {
-	func queryItems() throws -> [URLQueryItem]? { nil }
-	func body() throws -> Data? { nil }
+	func makeQueryItems() throws -> [URLQueryItem]? { nil }
+	func makeBody() throws -> Data? { nil }
 }
