@@ -11,20 +11,18 @@ import Foundation
 // MARK: - NetworkRequest
 
 public protocol NetworkRequest {
-	associatedtype DecodedResponse: Decodable
+	associatedtype ResponseBody: Decodable
 
 	var method: HTTPMethod { get }
 	var path: String { get }
 
-	func makeQueryItems() throws -> [URLQueryItem]?
-	func makeBody() throws -> Data?
+	var queryItems: [URLQueryItem]? { get throws }
 
-	func handleResponse(_ response: URLResponse, data: Data) throws -> DecodedResponse
+	func handleResponse(_ response: URLResponse, data: Data) throws -> ResponseBody
 }
 
 // MARK: - NetworkRequest+Default
 
 public extension NetworkRequest {
-	func makeQueryItems() throws -> [URLQueryItem]? { nil }
-	func makeBody() throws -> Data? { nil }
+	var queryItems: [URLQueryItem]? { nil }
 }
