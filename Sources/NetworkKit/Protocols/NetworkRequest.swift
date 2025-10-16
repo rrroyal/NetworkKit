@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - NetworkRequest
 
-public protocol NetworkRequest {
+public protocol NetworkRequest: Sendable {
 	associatedtype ResponseBody: Decodable
 
 	var method: HTTPMethod { get }
